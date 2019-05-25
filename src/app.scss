@@ -1,0 +1,55 @@
+@import 'variables';
+
+@import '~font-awesome/scss/font-awesome';
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.column {
+  border: 1px solid #cccccc;
+  margin: 0 5px;
+  width: 100%;
+
+  &-title {
+    background-color: #d9d9d9;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+  }
+}
+
+.card {
+  border: 1px solid #cccccc;
+  border-left: 4px solid blue;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+
+  border-radius: 3px;
+  min-height: 100px;
+  margin: 5px 10px;
+  padding: 10px 15px;
+
+  &-title {
+    font-size: 18px;
+  }
+
+  .remove-card-btn {
+    align-self: baseline;
+    background-color: transparent;
+    border: 0;
+    color: #cc0000;
+    outline: none;
+  }
+}

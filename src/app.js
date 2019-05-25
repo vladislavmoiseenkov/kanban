@@ -1,5 +1,5 @@
 import { render } from './modules/Board';
 
-import style from './styles/app.scss';
+import style from './app.scss';
 
 render();

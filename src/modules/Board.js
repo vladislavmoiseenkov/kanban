@@ -7,19 +7,20 @@ const render = () => {
   const rowEl = document.createElement('div');
   const colEl = document.createElement('div');
 
-  containerEl.className = 'container';
+  containerEl.className = 'container mt-2';
   rowEl.className ='row';
   colEl.className = 'col-12';
 
-  console.log(rowEl, colEl);
-
   let boardEl = document.createElement('div');
+
   boardEl.className = 'board';
   boardEl = renderColumn(boardEl, getColumns());
 
   colEl.append(boardEl);
   rowEl.append(colEl);
-  containerEl.append(rowEl)
+
+  containerEl.append(rowEl);
+
   app.append(containerEl);
 
 };
