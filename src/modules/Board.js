@@ -1,6 +1,8 @@
-import { getColumns, renderColumn } from './Columns';
+import { getColumns } from './Columns';
+import { getCards } from './Cards';
+import { renderCard, renderColumn } from '../utils/render';
 
-const render = () => {
+const render = async () => {
   const app = document.getElementById('app');
 
   const containerEl = document.createElement('div');
@@ -14,7 +16,18 @@ const render = () => {
   let boardEl = document.createElement('div');
 
   boardEl.className = 'board';
-  boardEl = renderColumn(boardEl, getColumns());
+
+  const cards = await getCards();
+  const columns = await getColumns();
+
+  columns.forEach(column => {
+    const columnEl = renderColumn(column);
+    cards
+      .filter(card => card.columnId === column._id)
+      .map(renderCard)
+      .forEach(cardEl => columnEl.append(cardEl));
+    boardEl.append(columnEl);
+  });
 
   colEl.append(boardEl);
   rowEl.append(colEl);
