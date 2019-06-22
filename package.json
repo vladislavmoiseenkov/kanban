@@ -21,7 +21,7 @@
     "webpack-dev-server": "^3.4.1"
   },
   "scripts": {
-    "start": "webpack && http-server",
+    "start": "webpack && http-server -o",
     "build": "webpack",
     "watch": "webpack -w",
     "test:unit": "jest",
