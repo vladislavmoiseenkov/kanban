@@ -30,13 +30,11 @@ const renderCard = (card) => {
 
     if (event.charCode === 13) {
       event.preventDefault();
+      event.target.blur();
     }
     if (event.charCode === 27) {
       name.append(card.name);
-    }
-    if (name.innerText !== card.name) {
-      await updateCard(card._id, name.innerText);
-      card.name = name.innerText;
+      event.target.blur();
     }
   });
 
