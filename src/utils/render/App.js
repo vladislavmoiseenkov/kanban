@@ -11,7 +11,7 @@ const render = async () => {
   rowEl.className ='row';
   colEl.className = 'col-12';
 
-const boardEl = await renderBoard();
+  const boardEl = await renderBoard();
 
   colEl.append(boardEl);
   rowEl.append(colEl);
