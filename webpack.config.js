@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   mode: 'development',
@@ -30,8 +31,19 @@ module.exports = {
             outputPath: 'fonts/'
           }
         }]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+        }
       }
     ],
+  },
+  resolve: {
+    modules: ['node_modules', path.resolve(__dirname, '/')],
+    extensions: [".js", ".json", ".jsx", ".css"]
   },
   plugins: [
     new ExtractTextPlugin('style.css')

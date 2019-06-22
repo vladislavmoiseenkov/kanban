@@ -1,4 +1,4 @@
-import { render } from './modules/Board';
+import { render } from './utils/render/App';
 
 import style from './app.scss';
 

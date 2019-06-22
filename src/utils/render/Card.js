@@ -1,4 +1,5 @@
-import { updateCard } from '../../modules/Cards';
+import { removeCard, updateCard } from '../../modules/Cards';
+import { TARGET_BUTTON, TARGET_ICON } from '../constants';
 
 const renderCard = (card) => {
   const cardEl = document.createElement('div');
@@ -14,17 +15,38 @@ const renderCard = (card) => {
   title.setAttribute('contenteditable', 'true');
   title.setAttribute('data-card-title', `title-${card._id}`);
   title.addEventListener('blur', async (event) => {
-    const newName = document.querySelector(`[data-card-title='title-${card._id}']`);
+    const newName = event.target;
 
     if (newName.innerText.length && (card.name !== newName.innerText)) {
       await updateCard(card._id, newName.innerText);
+      card.name = newName.innerText;
     } else if (card.name !== newName.innerText) {
       newName.append(card.name);
     }
   });
 
+  title.addEventListener('keypress', async (event) => {
+    const name = event.target;
+
+    if (event.charCode === 13) {
+      event.preventDefault();
+    }
+    if (event.charCode === 27) {
+      name.append(card.name);
+    }
+    if (name.innerText !== card.name) {
+      await updateCard(card._id, name.innerText);
+      card.name = name.innerText;
+    }
+  });
+
   const removeCardBtn = document.createElement('button');
   const trashIcon = document.createElement('i');
+  removeCardBtn.addEventListener('click', async (event) => {
+    if ((await removeCard(card._id)).message === 'OK') {
+      removeCardFromDOM(card._id);
+    }
+  });
 
   removeCardBtn.setAttribute('data-id', card._id);
   trashIcon.setAttribute('data-id', card._id);
