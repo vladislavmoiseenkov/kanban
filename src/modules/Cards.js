@@ -13,7 +13,7 @@ const removeCard = async (id) => {
 };
 
 const updateCard = async (id, name) => {
-  return (await api.patch(`/task/${id}`, { name }))
+  return (await api.patch(`/task/${id}`, { name })).data;
 };
 
 export { getCards, addCard, removeCard, updateCard };
