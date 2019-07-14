@@ -12,8 +12,8 @@ const removeCard = async (id) => {
   return (await api.delete(`/task/${id}`)).data;
 };
 
-const updateCard = async (id, name) => {
-  return (await api.patch(`/task/${id}`, { name })).data;
+const updateCard = async (id, params) => {
+  return (await api.patch(`/task/${id}`, params)).data;
 };
 
 export { getCards, addCard, removeCard, updateCard };

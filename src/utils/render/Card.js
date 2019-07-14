@@ -1,5 +1,15 @@
 import { removeCard, updateCard } from '../../modules/Cards';
-import { TARGET_BUTTON, TARGET_ICON } from '../constants';
+import { draggable } from '../utils';
+
+const dragStart = (event) => {
+  draggable.el = event.target;
+  setTimeout(() => event.target.classList.add('invisible'), 0);
+};
+
+const dragEnd = (event) => {
+  event.target.classList = 'card';
+  draggable.el = null;
+};
 
 const renderCard = (card) => {
   const cardEl = document.createElement('div');
@@ -18,7 +28,7 @@ const renderCard = (card) => {
     const newName = event.target;
 
     if (newName.innerText.length && (card.name !== newName.innerText)) {
-      await updateCard(card._id, newName.innerText);
+      await updateCard(card._id, { name: newName.innerText});
       card.name = newName.innerText;
     } else if (card.name !== newName.innerText) {
       newName.append(card.name);
@@ -60,6 +70,10 @@ const renderCard = (card) => {
   cardHeader.append(removeCardBtn);
 
   cardEl.append(cardHeader);
+
+  cardEl.addEventListener('dragstart', dragStart);
+  cardEl.addEventListener('dragend', dragEnd);
+  cardEl.addEventListener('drop', (event) => event.preventDefault());
 
   return cardEl;
 };
