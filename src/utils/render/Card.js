@@ -1,8 +1,7 @@
 import { removeCard, updateCard } from '../../modules/Cards';
-import { draggable } from '../utils';
 
 const dragStart = (event) => {
-  draggable.el = event.target;
+  event.dataTransfer.setData('card-id', event.target.dataset.id);
   setTimeout(() => event.target.classList.add('invisible'), 0);
 };
 
@@ -15,7 +14,7 @@ const renderCard = (card) => {
   const cardEl = document.createElement('div');
   cardEl.className = 'card';
   cardEl.setAttribute('draggable', 'true');
-  cardEl.setAttribute('data-id', `card-${card._id}`);
+  cardEl.setAttribute('data-id', card._id);
 
   const cardHeader = document.createElement('div');
   cardHeader.className = 'card-title d-flex justify-content-between';
@@ -28,7 +27,7 @@ const renderCard = (card) => {
     const newName = event.target;
 
     if (newName.innerText.length && (card.name !== newName.innerText)) {
-      await updateCard(card._id, { name: newName.innerText});
+      await updateCard(card._id, { name: newName.innerText });
       card.name = newName.innerText;
     } else if (card.name !== newName.innerText) {
       newName.append(card.name);
@@ -79,7 +78,7 @@ const renderCard = (card) => {
 };
 
 const removeCardFromDOM = (id) => {
-  document.querySelector(`[data-id='card-${id}']`).remove();
+  document.querySelector(`[data-id='${id}']`).remove();
 };
 
 export { renderCard, removeCardFromDOM };

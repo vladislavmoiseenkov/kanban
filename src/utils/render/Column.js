@@ -1,6 +1,5 @@
 import { addCard, updateCard } from '../../modules/Cards';
 import { renderCard } from './index';
-import { draggable } from '../utils';
 
 const dragOver = (event) => {
   event.preventDefault();
@@ -15,14 +14,17 @@ const dragLeave = (event) => {
   event.target.classList.remove('dragEnter');
 };
 const dragDrop = async (event) => {
-  console.log(event);
   if (event.toElement.classList.contains('column')) {
-    const cardId = draggable.el.dataset.id.replace('card-', '');
+    const cardId = event.dataTransfer.getData('card-id');
+
     const { columnId } = event.target.dataset;
 
     event.target.className = 'column';
-    event.target.append(draggable.el);
 
+    const cardEl = document.querySelector(`[data-id='${cardId}']`);
+    cardEl.classList.remove('invisible');
+
+    event.target.append(cardEl);
     await updateCard(cardId, { columnId });
   }
 };
