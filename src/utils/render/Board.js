@@ -11,10 +11,13 @@ export const renderBoard = async () => {
 
   columns.forEach(column => {
     const columnEl = renderColumn(column);
+    const tasksList = document.createElement('div');
+    tasksList.classList.add('column-tasks');
     cards
       .filter(card => card.columnId === column._id)
       .map(renderCard)
-      .forEach(cardEl => columnEl.append(cardEl));
+      .forEach(cardEl => tasksList.append(cardEl));
+    columnEl.append(tasksList);
     boardEl.append(columnEl);
   });
 
