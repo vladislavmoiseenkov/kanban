@@ -12,6 +12,7 @@ export const renderBoard = async () => {
   columns.forEach(column => {
     const columnEl = renderColumn(column);
     const tasksList = document.createElement('div');
+    tasksList.setAttribute('data-column-id', column._id);
     tasksList.classList.add('column-tasks');
     cards
       .filter(card => card.columnId === column._id)
