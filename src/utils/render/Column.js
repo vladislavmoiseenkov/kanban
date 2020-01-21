@@ -14,12 +14,12 @@ const dragLeave = (event) => {
   event.target.classList.remove('dragEnter');
 };
 const dragDrop = async (event) => {
-  if (event.toElement.classList.contains('column')) {
+  if (event.toElement.classList.contains('column-tasks')) {
     const cardId = event.dataTransfer.getData('card-id');
 
     const { columnId } = event.target.dataset;
 
-    event.target.className = 'column';
+    event.target.className = 'column-tasks';
 
     const cardEl = document.querySelector(`[data-id='${cardId}']`);
     cardEl.classList.remove('invisible');
@@ -46,7 +46,7 @@ const renderColumn = (column) => {
 
   const addTaskBTN = document.createElement('button');
   const icon = document.createElement('i');
-  addTaskBTN.className = 'btn btn-success';
+  addTaskBTN.className = 'btn';
   icon.className = 'fa fa-plus';
   addTaskBTN.append(icon);
   addTaskBTN.addEventListener('click', async () => {
