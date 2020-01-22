@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../variables';
 
 @import '~font-awesome/scss/font-awesome';
 @import '~bootstrap/scss/bootstrap';
@@ -7,6 +7,7 @@
 @import 'board';
 @import 'card';
 @import 'column';
+@import 'modal';
 
 #app {
     background-size: cover;
