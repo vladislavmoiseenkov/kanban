@@ -6,9 +6,11 @@ const closeModal = () => {
 };
 
 const addNewTask = async ({ columnId, name }) => {
-    const card = await addCard(name, columnId);
-    document.querySelector(`.column-tasks[data-column-id="${columnId}"]`).append((renderCard(card)));
-    closeModal();
+    if (name) {
+        const card = await addCard(name, columnId);
+        document.querySelector(`.column-tasks[data-column-id="${columnId}"]`).append((renderCard(card)));
+        closeModal();
+    }
 };
 
 export const Modal = columnId => {

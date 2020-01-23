@@ -11,10 +11,16 @@
 .dialog-window {
   align-items: center;
   background-color: #fff;
+  border-radius: 4px;
   display: flex;
   height: 150px;
-  left: calc(50% - 125px);
+  justify-content: space-around;
+  left: calc(50% - 200px);
   position: absolute;
   top: calc(50% - 75px);
-  width: 250px;
+  width: 400px;
+
+  input {
+    width: 70%;
+  }
 }
