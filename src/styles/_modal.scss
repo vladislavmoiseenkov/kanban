@@ -1,0 +1,26 @@
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.dialog-window {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  height: 150px;
+  justify-content: space-around;
+  left: calc(50% - 200px);
+  position: absolute;
+  top: calc(50% - 75px);
+  width: 400px;
+
+  input {
+    width: 70%;
+  }
+}

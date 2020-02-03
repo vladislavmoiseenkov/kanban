@@ -7,7 +7,6 @@ const dragStart = (event) => {
 
 const dragEnd = (event) => {
   event.target.classList = 'card';
-  draggable.el = null;
 };
 
 const renderCard = (card) => {

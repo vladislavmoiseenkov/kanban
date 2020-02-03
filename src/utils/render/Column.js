@@ -1,5 +1,5 @@
 import { addCard, updateCard } from '../../modules/Cards';
-import { renderCard } from './index';
+import { renderCard, Modal } from './index';
 
 const dragOver = (event) => {
   event.preventDefault();
@@ -14,12 +14,12 @@ const dragLeave = (event) => {
   event.target.classList.remove('dragEnter');
 };
 const dragDrop = async (event) => {
-  if (event.toElement.classList.contains('column')) {
+  if (event.toElement.classList.contains('column-tasks')) {
     const cardId = event.dataTransfer.getData('card-id');
 
     const { columnId } = event.target.dataset;
 
-    event.target.className = 'column';
+    event.target.className = 'column-tasks';
 
     const cardEl = document.querySelector(`[data-id='${cardId}']`);
     cardEl.classList.remove('invisible');
@@ -28,9 +28,12 @@ const dragDrop = async (event) => {
     await updateCard(cardId, { columnId });
   }
 };
+const openModal = event => {
+  const { columnId } = event.target.dataset;
+  document.body.append(Modal(columnId));
+};
 
 const renderColumn = (column) => {
-
   const columnEl = document.createElement('div');
   columnEl.className = 'column';
   columnEl.setAttribute('data-column-id', column._id);
@@ -45,17 +48,10 @@ const renderColumn = (column) => {
   columnHeaderEl.append(titleEl);
 
   const addTaskBTN = document.createElement('button');
-  const icon = document.createElement('i');
-  addTaskBTN.className = 'btn btn-success';
-  icon.className = 'fa fa-plus';
-  addTaskBTN.append(icon);
-  addTaskBTN.addEventListener('click', async () => {
-    const title = prompt('Card name', '');
-    if (title && title.length) {
-      const newTask = await addCard(title, column._id);
-      columnEl.append(renderCard(newTask));
-    }
-  });
+  addTaskBTN.className = 'btn';
+  addTaskBTN.innerHTML = '&#10010';
+  addTaskBTN.setAttribute('data-column-id', column._id);
+  addTaskBTN.addEventListener('click', openModal);
 
   columnHeaderEl.append(addTaskBTN);
   columnEl.append(columnHeaderEl);
